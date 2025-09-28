@@ -1,0 +1,118 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(120deg, #f6f8fc 0%, #e9f0fa 100%);
+    color: #2c3e50;
+}
+main {
+    max-width: 900px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+section {
+    background: #fff;
+    padding: 2em 1.5em;
+    margin-bottom: 2em;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(44,62,80,0.07);
+    border: 1px solid #e3e8ee;
+}
+label {
+    margin-right: 1em;
+    font-weight: 500;
+}
+input, select, button {
+    font-size: 1em;
+    padding: 0.4em 0.7em;
+    border-radius: 6px;
+    border: 1px solid #bfc9d4;
+    margin: 0.2em 0.5em 0.2em 0;
+    background: #f6f8fc;
+    transition: border 0.2s;
+}
+input:focus, select:focus, button:focus {
+    border: 1.5px solid #2980b9;
+    outline: none;
+}
+button {
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(44,62,80,0.07);
+    transition: background 0.2s;
+}
+button:hover {
+    background: #1c5d99;
+}
+canvas {
+    display: block;
+    margin: 1.5em auto;
+    background: #f6f8fc;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgba(44,62,80,0.05);
+    max-width: 100%;
+}
+#tree-svg-container, #forest-svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2em;
+    padding: 1em 0;
+    background: #f6f8fc;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px rgba(44,62,80,0.05);
+    overflow-x: auto;
+}
+#metrics {
+    margin-top: 1em;
+    font-size: 1.1em;
+}
+#quiz-feedback {
+    margin-top: 1em;
+    font-weight: bold;
+    color: #2980b9;
+}
+#quiz-form label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+.instructions {
+    font-size: 1.08em;
+    color: #1c5d99;
+    margin-bottom: 1em;
+    font-style: italic;
+}
+#quiz-list {
+    margin-top: 1em;
+    font-size: 1.08em;
+}
+#quiz-list li {
+    margin-bottom: 1.2em;
+    padding: 0.7em 1em;
+    background: #f6f8fc;
+    border-radius: 8px;
+    border: 1px solid #e3e8ee;
+    list-style-type: upper-roman;
+}
+#quiz-list label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+#quiz-list button {
+    margin-top: 0.5em;
+}
+@media (max-width: 700px) {
+    main {
+        padding: 0 0.2em;
+    }
+    section {
+        padding: 1em 0.5em;
+    }
+}

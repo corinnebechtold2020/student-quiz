@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Forest Regression Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Random Forest Regression Interactive Quiz</h1>
+    <section id="data-generation">
+        <h2>1. Data Generation</h2>
+        <p class="instructions">Choose the dataset characteristics and click 'Generate Data' to create synthetic regression data.</p>
+        <form id="data-form">
+            <label>Number of data points: <input type="number" id="num-points" value="100" min="10" max="1000"></label><br>
+            <label>Noise level: <input type="number" id="noise" value="0.2" step="0.01" min="0" max="1"></label><br>
+            <label>Function complexity: <input type="number" id="complexity" value="1" min="1" max="5"></label><br>
+            <button type="submit">Generate Data</button>
+        </form>
+        <canvas id="data-chart" width="700" height="350"></canvas>
+    </section>
+    <section id="rf-controls">
+        <h2>2. Random Forest Model</h2>
+        <p class="instructions">Set the random forest parameters and click 'Train Random Forest' to see predictions and tree visualizations.</p>
+        <form id="rf-form">
+            <label>Number of trees (n_estimators): <input type="number" id="n-estimators" value="10" min="1" max="100"></label><br>
+            <label>Max depth: <input type="number" id="max-depth" value="5" min="1" max="20"></label><br>
+            <label>Max features: <input type="number" id="max-features" value="1" min="1" max="5"></label><br>
+            <button type="submit">Train Random Forest</button>
+        </form>
+        <div id="tree-visualization">
+            <label>Show tree:
+                <select id="tree-select">
+                    <option value="forest">Forest (ensemble)</option>
+                    <option value="tree-0">Tree 1</option>
+                    <option value="tree-1">Tree 2</option>
+                    <option value="tree-2">Tree 3</option>
+                </select>
+            </label>
+        </div>
+        <canvas id="rf-chart" width="700" height="350"></canvas>
+        <div id="tree-svg-container" style="margin-top:2em;"></div>
+        <div id="forest-svg-container" style="margin-top:2em; width:100%; min-width:700px; min-height:220px; overflow-x:auto;"></div>
+        <div id="metrics">
+            <strong>MSE:</strong> <span id="mse-value">-</span>
+        </div>
+    </section>
+    <section id="quiz">
+        <h2>3. Quiz Questions</h2>
+        <ol id="quiz-list" style="padding-left: 2em;"></ol>
+        <div id="quiz-feedback"></div>
+    </section>
+    <script src="app.js"></script>
+</body>
+</html>
+
