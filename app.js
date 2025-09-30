@@ -325,7 +325,6 @@ dataForm.addEventListener('submit', (e) => {
     rfResults = null;
     mseValue.textContent = '-';
     quizState = 0;
-    showQuizQuestion();
 });
 
 // Train RF
@@ -340,7 +339,6 @@ rfForm.addEventListener('submit', (e) => {
     plotRF(result.xGrid, result.yTrue, result.yPred, result.trees.slice(0,3));
     mseValue.textContent = result.mse.toFixed(3);
     quizState = 0;
-    showQuizQuestion();
     updateForestVisualization();
 });
 
@@ -413,6 +411,9 @@ function updateTreeVisualization() {
 function renderForestSVG(numTrees) {
     const container = document.getElementById('forest-svg-container');
     container.innerHTML = '';
+    // Debug info
+    let debug = `<div style='color:#c0392b;font-size:12px;'>numTrees: ${numTrees}, rfResults.trees.length: ${rfResults && rfResults.trees ? rfResults.trees.length : 'undefined'}</div>`;
+    container.innerHTML = debug;
     if (!rfResults || !numTrees || numTrees < 1) return;
     const width = Math.max(700, numTrees * 120), height = 120;
     let svg = `<svg width='${width}' height='${height}'>`;
@@ -434,8 +435,10 @@ function renderForestSVG(numTrees) {
 
 // Update forest visualization on selection
 function updateForestVisualization() {
-    if (!rfResults) {
-        document.getElementById('forest-svg-container').innerHTML = '';
+    const container = document.getElementById('forest-svg-container');
+    container.innerHTML = '';
+    if (!rfResults || !Array.isArray(rfResults.trees) || rfResults.trees.length === 0) {
+        container.innerHTML = '<div style="color:#888;padding:1em;">No forest to display. Train a random forest to see the meta tree.</div>';
         return;
     }
     renderForestSVG(rfResults.trees.length);
@@ -452,27 +455,11 @@ treeSelect.addEventListener('change', () => {
         const idx = parseInt(val.split('-')[1]);
         plotRF(rfResults.xGrid, rfResults.yTrue, rfResults.trees[idx], []);
         renderTreeSVG(rfResults.trees[idx], +document.getElementById('max-depth').value);
-        document.getElementById('forest-svg-container').innerHTML = '';
+        updateForestVisualization();
     }
 });
 
 // Quiz logic
-function showQuizQuestion() {
-    quizForm.style.display = 'none';
-    quizFeedback.textContent = '';
-    const qObj = quizQuestions[quizState];
-    if (!qObj) {
-        quizQuestion.textContent = 'Quiz complete!';
-        quizOptions.innerHTML = '';
-        return;
-    }
-    quizQuestion.textContent = qObj.question;
-    quizOptions.innerHTML = qObj.options.map((opt, idx) => {
-        const val = String.fromCharCode(97 + idx); // 'a', 'b', ...
-        return `<label><input type="radio" name="q" value="${val}"> ${opt}</label><br>`;
-    }).join('');
-    quizForm.style.display = 'block';
-}
 
 
 
@@ -513,3 +500,8 @@ function renderQuizList() {
 
 // Render quiz list on load
 renderQuizList();
+
+// Render forest visualization on load if rfResults exist
+if (typeof rfResults !== 'undefined' && rfResults && rfResults.trees) {
+    updateForestVisualization();
+}
